@@ -1,0 +1,1 @@
+CLI pulls data from Sola MCP - regex scans 105 workflows in 0.1s

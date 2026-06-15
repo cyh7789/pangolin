@@ -1,0 +1,46 @@
+1
+00:00:00,500 --> 00:00:04,500
+Introducing Pangolin — built for the Sola Security Hackathon
+
+2
+00:00:05,000 --> 00:00:10,500
+Sola's pipeline scans your GitHub workflows daily,
+classifying findings and alerting your team
+
+3
+00:00:11,000 --> 00:00:16,000
+Our CLI pulls data from Sola MCP — the regex engine
+scans 105 workflows in 0.1 seconds
+
+4
+00:00:16,500 --> 00:00:21,000
+Then GPT-5.5 goes deep — reasoning through
+real attack chains
+
+5
+00:00:21,500 --> 00:00:27,500
+6 confirmed vulnerabilities, 0 false positives,
+29 proof-of-concept files generated
+
+6
+00:00:28,000 --> 00:00:33,500
+The report shows severity breakdown, attack scenarios,
+and downloadable PoC files
+
+7
+00:00:38,000 --> 00:00:42,000
+Detection isn't enough — one command generates
+a fix and opens a GitHub PR
+
+8
+00:00:42,500 --> 00:00:47,500
+Full vulnerability context and clean diff
+
+9
+00:00:50,000 --> 00:00:55,500
+Everything flows to Slack — alerts, reports,
+fix notifications. A complete security loop.
+
+10
+00:00:56,500 --> 00:00:59,500
+Pangolin. Scan. Analyze. Fix. Automatically.

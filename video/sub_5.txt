@@ -1,0 +1,1 @@
+Report shows severity breakdown and downloadable PoC files
