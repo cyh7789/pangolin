@@ -242,6 +242,32 @@ def cmd_sola_scan(args):
     avg_score = sum(p["score"] for p in postures) / max(len(postures), 1)
     print(f"           Average posture score: {avg_score:.0%}")
 
+    # Stage 3b: Semgrep cross-validation
+    semgrep_coverage = None
+    semgrep_data = sola_data.get("semgrep", {})
+    semgrep_rules = semgrep_data.get("rules", [])
+    semgrep_findings_data = semgrep_data.get("findings", [])
+
+    if semgrep_rules:
+        from .sola_scanner import get_semgrep_rule_coverage, cross_validate_findings
+        print_stage("3b", f"Semgrep cross-validation ({len(semgrep_rules)} rules)...")
+        semgrep_coverage = get_semgrep_rule_coverage(semgrep_rules)
+        print(f"           Rule coverage: {semgrep_coverage['covered_by_semgrep']}/{semgrep_coverage['total_patterns']} patterns")
+
+        if semgrep_findings_data:
+            target = llm_findings if args.deep and llm_findings else regex_findings
+            cross_validate_findings(target, semgrep_findings_data)
+            corroborated = sum(
+                1 for f in target
+                if (f.get("semgrep_corroborated") if isinstance(f, dict)
+                    else getattr(f, "context", {}).get("semgrep_corroborated"))
+            )
+            print(f"           Semgrep corroborated: {corroborated} findings")
+        else:
+            print(f"           No Semgrep scan findings yet (rules loaded, scans pending)")
+    else:
+        print("  [Skip] No Semgrep data in input file")
+
     # Stage 4: Generate reports
     print_stage(4, "Generating reports...")
 

@@ -367,4 +367,125 @@ QUERIES = {
         FROM github_actions_repository_secret
         ORDER BY repository_full_name, name
     """,
+
+    "semgrep_rule_coverage": """
+        SELECT category, severity, vulnerability_class, cwe_categories,
+               count(*) as rule_count
+        FROM semgrep_policy_rule
+        WHERE category = 'security'
+        GROUP BY category, severity, vulnerability_class, cwe_categories
+        ORDER BY rule_count DESC
+    """,
+
+    "semgrep_findings": """
+        SELECT repository_name, severity, confidence, rule_name, rule_message,
+               rule_category, rule_cwe_names, rule_vulnerability_classes,
+               location_file_path, location_line, state
+        FROM semgrep_sast_finding
+        WHERE state != 'dismissed'
+        ORDER BY severity, repository_name
+    """,
+
+    "semgrep_sca_findings": """
+        SELECT repository_name, severity, confidence, rule_name, rule_message,
+               found_dependency_package, found_dependency_version,
+               vulnerability_identifier, reachability, location_file_path
+        FROM semgrep_sca_finding
+        WHERE state != 'dismissed'
+        ORDER BY severity
+    """,
+
+    "semgrep_secrets": """
+        SELECT repository_name, severity, type, validation_state,
+               finding_path, status
+        FROM semgrep_secrets_finding
+        WHERE status != 'dismissed'
+        ORDER BY severity
+    """,
 }
+
+
+# ============================================================
+# Semgrep Cross-Validation
+# ============================================================
+
+PANGOLIN_TO_CWE = {
+    "CICD-001": ["CWE-78", "CWE-94"],
+    "CICD-002": ["CWE-269", "CWE-250"],
+    "CICD-003": ["CWE-829", "CWE-494"],
+    "CICD-004": ["CWE-250", "CWE-269"],
+    "CICD-005": ["CWE-200", "CWE-312"],
+    "CICD-006": ["CWE-284"],
+    "CICD-007": ["CWE-494", "CWE-829"],
+    "CICD-008": ["CWE-284", "CWE-269"],
+    "SC-001": ["CWE-494"],
+    "SC-002": ["CWE-494", "CWE-829"],
+    "SC-003": ["CWE-494"],
+    "SC-004": ["CWE-494"],
+    "CODE-001": ["CWE-78"],
+    "CODE-002": ["CWE-918"],
+    "CODE-003": ["CWE-502"],
+    "CODE-004": ["CWE-798", "CWE-312"],
+    "CODE-005": ["CWE-22"],
+}
+
+
+def get_semgrep_rule_coverage(semgrep_rules: list[dict]) -> dict:
+    """Analyze Semgrep rule coverage relative to Pangolin patterns."""
+    coverage = {}
+    for pattern_id, cwes in PANGOLIN_TO_CWE.items():
+        matching_rules = []
+        for rule in semgrep_rules:
+            rule_cwes = rule.get("cwe_categories", "") or ""
+            for cwe in cwes:
+                if cwe in rule_cwes:
+                    matching_rules.append({
+                        "severity": rule.get("severity", ""),
+                        "vuln_class": rule.get("vulnerability_class", ""),
+                        "count": rule.get("rule_count", 1),
+                    })
+                    break
+        coverage[pattern_id] = {
+            "cwes": cwes,
+            "semgrep_rules": len(matching_rules),
+            "covered": len(matching_rules) > 0,
+        }
+    total = len(coverage)
+    covered = sum(1 for v in coverage.values() if v["covered"])
+    return {
+        "total_patterns": total,
+        "covered_by_semgrep": covered,
+        "coverage_pct": round(covered / max(total, 1), 2),
+        "details": coverage,
+    }
+
+
+def cross_validate_findings(
+    pangolin_findings: list,
+    semgrep_findings: list[dict],
+) -> list:
+    """Boost confidence of Pangolin findings that Semgrep also flagged."""
+    semgrep_by_repo = {}
+    for sf in semgrep_findings:
+        repo = sf.get("repository_name", "")
+        semgrep_by_repo.setdefault(repo, []).append(sf)
+
+    for finding in pangolin_findings:
+        repo = ""
+        if hasattr(finding, "context") and finding.context:
+            repo = finding.context.get("repo", "")
+        elif isinstance(finding, dict):
+            repo = finding.get("_repo", finding.get("context", {}).get("repo", ""))
+
+        repo_short = repo.split("/")[-1] if "/" in repo else repo
+        semgrep_hits = semgrep_by_repo.get(repo_short, [])
+
+        if semgrep_hits:
+            if hasattr(finding, "context") and finding.context:
+                finding.context["semgrep_corroborated"] = True
+                finding.context["semgrep_findings_in_repo"] = len(semgrep_hits)
+            elif isinstance(finding, dict):
+                finding["semgrep_corroborated"] = True
+                finding["semgrep_findings_in_repo"] = len(semgrep_hits)
+
+    return pangolin_findings
