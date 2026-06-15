@@ -1,0 +1,51 @@
+[
+  {
+    "id": "s1",
+    "start": 0.0,
+    "duration": 4.080333,
+    "end": 4.08,
+    "text": "Introducing Pangolin. Built for the Sola Security Hackathon."
+  },
+  {
+    "id": "s2",
+    "start": 4.88,
+    "duration": 4.812333,
+    "end": 9.69,
+    "text": "Sola scans your workflows daily, classifying findings and alerting your team."
+  },
+  {
+    "id": "s3",
+    "start": 10.49,
+    "duration": 16.158333,
+    "end": 26.65,
+    "text": "Our CLI pulls data from Sola MCP. Regex scans one hundred five workflows in a tenth of a second. GPT five point five reasons through attack chains. Six confirmed, zero false positives. Semgrep cross-validates all seventeen patterns."
+  },
+  {
+    "id": "s4",
+    "start": 27.45,
+    "duration": 5.361333,
+    "end": 32.81,
+    "text": "The report shows severity, attack scenarios, and downloadable proof of concept files."
+  },
+  {
+    "id": "s5",
+    "start": 33.81,
+    "duration": 5.910333,
+    "end": 39.72,
+    "text": "One command generates a fix and opens a GitHub pull request with full context."
+  },
+  {
+    "id": "s6",
+    "start": 40.72,
+    "duration": 3.775333,
+    "end": 44.5,
+    "text": "Everything flows to Slack. A complete security loop."
+  },
+  {
+    "id": "s7",
+    "start": 45.3,
+    "duration": 4.873333,
+    "end": 50.17,
+    "text": "Pangolin. Scan. Analyze. Fix. Automatically."
+  }
+]

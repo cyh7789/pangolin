@@ -25,7 +25,7 @@
       .tw-dot { width:12px; height:12px; border-radius:50%; }
       .tw-dot.r { background:#f7768e; } .tw-dot.y { background:#e0af68; } .tw-dot.g { background:#9ece6a; }
       .tw-title { font-family:'JetBrains Mono',monospace; font-size:13px; color:#565f89; margin-left:12px; }
-      .tw-body { padding:24px 28px; font-family:'JetBrains Mono',monospace; font-size:16px; line-height:1.6; color:#a9b1d6; min-height:540px; }
+      .tw-body { padding:24px 28px; font-family:'JetBrains Mono',monospace; font-size:15px; line-height:1.5; color:#a9b1d6; min-height:580px; }
       .tc { color:#9ece6a; } .ts { color:#7aa2f7; font-weight:600; } .to { color:#9ece6a; }
       .tw2 { color:#e0af68; } .tr { color:#f7768e; } .th { color:#ff9e64; } .td { color:#565f89; } .tb { color:#c0caf5; font-weight:600; }
       .rpt { background:#161b22; border:1px solid #30363d; border-radius:12px; width:1400px; padding:36px; }
@@ -54,7 +54,7 @@
     </style>
   </head>
   <body>
-    <div id="root" data-composition-id="main" data-start="0" data-duration="62" data-width="1920" data-height="1080">
+    <div id="root" data-composition-id="main" data-start="0" data-duration="53" data-width="1920" data-height="1080">
     <div class="clip scene-title" id="s0">
       <div class="hack-name" id="s0a">$ecur1ty H4ckath0n. By Sola</div>
       <div class="big-stats" id="s0b"><em>105</em> workflows. <em>49</em> critical. <em>0.1s</em>.</div>
@@ -83,8 +83,9 @@
           <div id="t12" style="opacity:0"><span class="td">           [3/5] angular/benchmark-compare.yml...</span></div>
           <div id="t13" style="opacity:0"><span class="to">           6 confirmed, 0 false positives filtered</span></div>
           <div id="t14" style="opacity:0"><span class="ts">  [Stage 3] Posture: </span><span class="tw2">22%</span></div>
-          <div id="t15" style="opacity:0"><span class="ts">  [Stage 4] </span>HTML report + <span class="to">29 PoC files</span></div>
-          <div id="t16" style="opacity:0"><span class="ts">  [Stage 5] </span><span class="to">Slack notification + zip sent</span></div>
+          <div id="t15" style="opacity:0"><span class="ts">  [Stage 3b] Semgrep cross-validation: </span><span class="to">17/17 patterns covered</span></div>
+          <div id="t16" style="opacity:0"><span class="ts">  [Stage 4] </span>HTML report + <span class="to">29 PoC files</span></div>
+          <div id="t17" style="opacity:0"><span class="ts">  [Stage 5] </span><span class="to">Slack notification + zip sent</span></div>
         </div>
       </div>
     </div>
@@ -154,71 +155,78 @@
       <div id="sub-text" style="display:inline-block;font-family:'Inter',sans-serif;font-size:36px;font-weight:600;color:#fff;background:rgba(0,0,0,0.75);padding:12px 32px;border-radius:10px;line-height:1.4;max-width:1600px;text-shadow:0 2px 4px rgba(0,0,0,0.5);opacity:0;"></div>
     </div>
 
-    <audio id="voiceover" data-start="0" data-duration="60" data-track-index="0" src="voiceover-60s.wav"></audio>
+    <audio id="voiceover" data-start="0" data-duration="53" data-track-index="0" src="voiceover-60s.wav"></audio>
 
     <script>
       window.__timelines = window.__timelines || {};
       const tl = gsap.timeline({ paused: true });
 
+      // S0: Title (0.0 - 4.1)
       tl.from("#s0a",{opacity:0,y:-30,duration:0.6},0.2);
       tl.from("#s0b",{opacity:0,y:30,duration:0.6},0.7);
       tl.from("#s0c",{opacity:0,duration:0.5},1.3);
-      tl.to("#s0",{opacity:0,duration:0.3},4.5);
+      tl.to("#s0",{opacity:0,duration:0.3},4.3);
 
-      tl.to("#s1",{opacity:1,duration:0.3},5.0);
-      tl.from("#s1a",{opacity:0,y:-20,duration:0.4},5.2);
-      tl.from("#s1b",{opacity:0,scale:0.95,duration:0.5},5.6);
-      tl.from("#s1c",{opacity:0,duration:0.4},6.8);
-      tl.to("#s1",{opacity:0,duration:0.3},10.5);
+      // S1: Sola (4.9 - 9.7)
+      tl.to("#s1",{opacity:1,duration:0.3},4.9);
+      tl.from("#s1a",{opacity:0,y:-20,duration:0.4},5.1);
+      tl.from("#s1b",{opacity:0,scale:0.95,duration:0.5},5.5);
+      tl.from("#s1c",{opacity:0,duration:0.4},7.0);
+      tl.to("#s1",{opacity:0,duration:0.3},10.0);
 
-      tl.to("#s2",{opacity:1,duration:0.3},11.0);
-      var tt=11.3;
-      [0.5,0.3,0.2,0.2,0.3,0.3,0.5,0.4,0.5,0.5,0.3,0.3,0.3,0.5,0.3,0.3,0.4].forEach(function(d,i){
+      // S2: Terminal (10.5 - 26.7)
+      tl.to("#s2",{opacity:1,duration:0.3},10.5);
+      var tt=10.8;
+      [0.4,0.3,0.2,0.2,0.3,0.3,0.5,0.4,0.5,0.5,0.3,0.3,0.3,0.5,0.3,0.3,0.3,0.3].forEach(function(d,i){
         tl.to("#t"+i,{opacity:1,duration:0.15},tt); tt+=d;
       });
-      tl.to("#s2",{opacity:0,duration:0.3},27.5);
+      tl.to("#s2",{opacity:0,duration:0.3},27.0);
 
-      tl.to("#s3",{opacity:1,duration:0.3},28.0);
-      tl.from("#s3a",{opacity:0,y:-20,duration:0.4},28.2);
-      tl.from("#s3b",{opacity:0,y:30,duration:0.5},28.6);
-      tl.to("#f1",{opacity:1,duration:0.3},30.5);
-      tl.to("#f2",{opacity:1,duration:0.3},31.5);
-      tl.to("#f3",{opacity:1,duration:0.3},32.5);
-      tl.to("#pb",{opacity:1,duration:0.3},34.0);
-      tl.to("#s3",{opacity:0,duration:0.3},37.5);
+      // S3: Report (27.5 - 32.8)
+      tl.to("#s3",{opacity:1,duration:0.3},27.5);
+      tl.from("#s3a",{opacity:0,y:-20,duration:0.4},27.7);
+      tl.from("#s3b",{opacity:0,y:30,duration:0.5},28.0);
+      tl.to("#f1",{opacity:1,duration:0.3},29.0);
+      tl.to("#f2",{opacity:1,duration:0.3},29.8);
+      tl.to("#f3",{opacity:1,duration:0.3},30.6);
+      tl.to("#pb",{opacity:1,duration:0.3},31.5);
+      tl.to("#s3",{opacity:0,duration:0.3},33.3);
 
-      tl.to("#s4",{opacity:1,duration:0.3},38.0);
-      tl.from("#s4a",{opacity:0,y:-20,duration:0.4},38.2);
-      tl.to("#fx0",{opacity:1,duration:0.15},38.5);
-      tl.to("#fx1",{opacity:1,duration:0.15},39.5);
-      tl.to("#fx2",{opacity:1,duration:0.15},40.3);
-      tl.to("#fx3",{opacity:1,duration:0.15},41.5);
-      tl.to("#fx4",{opacity:1,duration:0.15},42.5);
-      tl.to("#prc",{opacity:1,duration:0.5},44.0);
-      tl.to("#s4",{opacity:0,duration:0.3},49.5);
+      // S4: Fix (33.8 - 39.7)
+      tl.to("#s4",{opacity:1,duration:0.3},33.8);
+      tl.from("#s4a",{opacity:0,y:-20,duration:0.4},34.0);
+      tl.to("#fx0",{opacity:1,duration:0.15},34.3);
+      tl.to("#fx1",{opacity:1,duration:0.15},35.0);
+      tl.to("#fx2",{opacity:1,duration:0.15},35.5);
+      tl.to("#fx3",{opacity:1,duration:0.15},36.3);
+      tl.to("#fx4",{opacity:1,duration:0.15},37.0);
+      tl.to("#prc",{opacity:1,duration:0.5},38.0);
+      tl.to("#s4",{opacity:0,duration:0.3},40.2);
 
-      tl.to("#s5",{opacity:1,duration:0.3},50.0);
-      tl.from("#s5a",{opacity:0,y:-20,duration:0.4},50.2);
-      tl.from("#s5b",{opacity:0,scale:0.95,duration:0.5},50.5);
-      tl.to("#s5c",{opacity:1,duration:0.4},53.0);
-      tl.to("#s5",{opacity:0,duration:0.3},55.5);
+      // S5: Slack (40.7 - 44.5)
+      tl.to("#s5",{opacity:1,duration:0.3},40.7);
+      tl.from("#s5a",{opacity:0,y:-20,duration:0.4},40.9);
+      tl.from("#s5b",{opacity:0,scale:0.95,duration:0.5},41.2);
+      tl.to("#s5c",{opacity:1,duration:0.4},43.0);
+      tl.to("#s5",{opacity:0,duration:0.3},44.8);
 
-      tl.to("#s6",{opacity:1,duration:0.3},56.0);
-      tl.from("#s6a",{opacity:0,scale:0.9,duration:0.5},56.2);
-      tl.from("#s6b",{opacity:0,y:20,duration:0.4},56.8);
-      tl.from("#s6c",{opacity:0,y:20,duration:0.4},57.3);
+      // S6: Closing (45.3 - 50.2)
+      tl.to("#s6",{opacity:1,duration:0.3},45.3);
+      tl.from("#s6a",{opacity:0,scale:0.9,duration:0.5},45.5);
+      tl.from("#s6b",{opacity:0,y:20,duration:0.4},46.5);
+      tl.from("#s6c",{opacity:0,y:20,duration:0.4},47.5);
 
+      // Subtitles — exact match to audio timeline
       var subs=[
-        [0.0,4.5,"Introducing Pangolin - built for the Sola Security Hackathon"],
-        [5.0,10.5,"Sola pipeline scans your GitHub workflows daily, classifying findings and alerting your team"],
-        [11.0,16.0,"Our CLI pulls data from Sola MCP - regex scans 105 workflows in 0.1 seconds"],
-        [16.5,21.0,"Then GPT-5.5 goes deep - reasoning through real attack chains"],
-        [21.5,27.5,"6 confirmed, 0 false positives, 29 proof-of-concept files generated"],
-        [28.0,33.5,"Report shows severity breakdown, attack scenarios, and downloadable PoC files"],
-        [38.0,42.0,"One command generates a fix and opens a GitHub pull request"],
-        [42.5,47.5,"Full vulnerability context and clean diff"],
-        [50.0,55.5,"Everything flows to Slack - a complete security loop"],
-        [56.5,59.5,"Pangolin. Scan. Analyze. Fix. Automatically."],
+        [0.0,4.1,"Introducing Pangolin. Built for the Sola Security Hackathon."],
+        [4.9,9.7,"Sola scans your workflows daily, classifying findings and alerting your team."],
+        [10.5,16.0,"Our CLI pulls data from Sola MCP. Regex scans 105 workflows in a tenth of a second."],
+        [16.5,21.5,"GPT-5.5 reasons through attack chains. Six confirmed, zero false positives."],
+        [22.0,26.6,"Semgrep cross-validates all 17 patterns."],
+        [27.4,32.8,"The report shows severity, attack scenarios, and downloadable proof-of-concept files."],
+        [33.8,39.7,"One command generates a fix and opens a GitHub pull request with full context."],
+        [40.7,44.5,"Everything flows to Slack. A complete security loop."],
+        [45.3,50.2,"Pangolin. Scan. Analyze. Fix. Automatically."],
       ];
       var subEl=document.getElementById("sub-text");
       subs.forEach(function(s){

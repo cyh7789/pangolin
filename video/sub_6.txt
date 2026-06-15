@@ -1,1 +1,0 @@
-One command generates a fix and opens a GitHub PR

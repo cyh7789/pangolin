@@ -1,1 +1,0 @@
-Introducing Pangolin - built for the Sola Security Hackathon
