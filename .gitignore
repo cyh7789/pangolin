@@ -31,3 +31,5 @@ reports/
 # Claude
 .claude/
 HANDOFF.md
+DESIGN.md
+SUBMISSION.md
