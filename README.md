@@ -1,6 +1,26 @@
+<div align="center">
+
+<img src="assets/cover.png" alt="Pangolin — Armored CI/CD Security Scanner" width="100%">
+
 # Pangolin
 
 **Armored CI/CD Pipeline Security Scanner** — powered by Sola Security MCP + LLM deep analysis + Semgrep cross-validation.
+
+<br>
+
+### [$ecur1ty H4ckath0n](https://www.boring.security) — Community Voting Open!
+
+We're competing in the **$ecur1ty H4ckath0n** by [Sola / Boring Security](https://www.boring.security).
+
+**If you find this project useful or interesting, please vote for us!**
+
+### [**Vote for Pangolin**](https://www.boring.security/?sort=votes&s=c6afac19-a7c7-4098-96a3-57a9bd93fe49)
+
+Voting is open until **June 30, 2026**. Every vote counts — thank you for your support!
+
+</div>
+
+---
 
 Pangolin scans your GitHub workflows for CI/CD vulnerabilities, reasons through attack chains with LLM, generates proof-of-concept files, and auto-fixes findings with GitHub PRs.
 
